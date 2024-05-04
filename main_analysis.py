@@ -5,8 +5,9 @@ import streamlit as st
 #file_path = 'option-chain-ED-NIFTY-09-May-2024.csv'
 st.title('Analysis')
 strike_price = st.number_input('Enter Price', value=22460)
+file_path = st.file_uploader('Upload CSV', type='csv')
 if st.button('Load CSV'):
-    file_path = st.file_uploader('Upload CSV', type='csv')
+    
     data = pd.read_csv(file_path, skiprows=1)
     st.write(data.head())
 
