@@ -9,7 +9,6 @@ file_path = st.file_uploader('Upload CSV', type='csv')
 if st.button('Load CSV'):
     
     data = pd.read_csv(file_path, skiprows=1)
-    st.write(data.head())
 
     example_strike_price = strike_price
 
@@ -75,13 +74,14 @@ if st.button('Load CSV'):
     total_put_oi = sum_oi1 + sum_change_oi1
 
     difference = total_call_oi - total_put_oi
-    print("First strategy")
+    st.info("First strategy")
     print(f'Total Call OI: {total_call_oi}')
     print(f'Total Put OI: {total_put_oi}')
     print(f'Difference: {difference}')
-    st.info(f'Total C O: {total_call_oi}')
-    st.info(f'Total P O: {total_put_oi}')
-    st.info(f'Difference: {difference}')
+    st.write(f'Total C O: {total_call_oi}')
+    st.write(f'Total P O: {total_put_oi}')
+    st.write(f'Difference: {difference}')
+
     # ratio of call to put
     if total_call_oi > total_put_oi:
         ratio = total_call_oi / total_put_oi
@@ -113,8 +113,8 @@ if st.button('Load CSV'):
     print(f'call ltp mul chng in oi: {sum_call_ltp_mul_chng_in_oi}')
     print(f'put ltp mul chng in oi: {sum_put_ltp_mul_chng_in_oi}')
     print(f'Ratio: {ratio}')
-    st.info(f'cl ltp mul chng in: {sum_call_ltp_mul_chng_in_oi}')
-    st.info(f'pt ltp mul chng in: {sum_put_ltp_mul_chng_in_oi}')
+    st.write(f'cl ltp mul chng in: {sum_call_ltp_mul_chng_in_oi}')
+    st.write(f'pt ltp mul chng in: {sum_put_ltp_mul_chng_in_oi}')
     if ratio < 225:
         print('Ratio is less than 225')
         st.info('Ratio is less than 225')
@@ -122,9 +122,11 @@ if st.button('Load CSV'):
             print('Bearish')
             print("Buy strike price: ", nearest_strikes_list[2])
             st.info('Bear')
-            st.info(f'price: {nearest_strikes_list[2]}')
+            st.info(f'price 1: {nearest_strikes_list[2]}')
+            st.info(f'price 2: {nearest_strikes_list[2] + 100}')
         else:
             print('Bullish')
             print("Buy strike price: ", nearest_strikes_list[0])
             st.info('Bull')
-            st.info(f'price: {nearest_strikes_list[0]}')
+            st.info(f'price 1: {nearest_strikes_list[0]}')
+            st.info(f'price 2: {nearest_strikes_list[0] - 100}')
