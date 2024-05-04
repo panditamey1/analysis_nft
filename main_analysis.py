@@ -74,59 +74,59 @@ if st.button('Load CSV'):
     total_put_oi = sum_oi1 + sum_change_oi1
 
     difference = total_call_oi - total_put_oi
-    st.info("First strategy")
-    print(f'Total Call OI: {total_call_oi}')
-    print(f'Total Put OI: {total_put_oi}')
-    print(f'Difference: {difference}')
-    st.write(f'Total C O: {total_call_oi}')
-    st.write(f'Total P O: {total_put_oi}')
-    st.write(f'Difference: {difference}')
+    with st.expander("First strategy") :
+        print(f'Total Call OI: {total_call_oi}')
+        print(f'Total Put OI: {total_put_oi}')
+        print(f'Difference: {difference}')
+        st.write(f'Total C O: {total_call_oi}')
+        st.write(f'Total P O: {total_put_oi}')
+        st.write(f'Difference: {difference}')
 
-    # ratio of call to put
-    if total_call_oi > total_put_oi:
-        ratio = total_call_oi / total_put_oi
-    else:
-        ratio = total_put_oi / total_call_oi
-    if ratio < 225:
-        print('Ratio is less than 225')
-        st.info('Ratio is less than 225')
-        if difference > 0:
-            print('Bearish')
-            print("Buy strike price: ", nearest_strikes_list[2])
-            st.info('Bear')
-            st.info(f'price: {nearest_strikes_list[2]}')
+        # ratio of call to put
+        if total_call_oi > total_put_oi:
+            ratio = total_call_oi / total_put_oi
         else:
-            print('Bullish')
-            print("Buy strike price: ", nearest_strikes_list[0])
-            st.info('Bull')
-            st.info(f'price: {nearest_strikes_list[0]}')
-    print("-----------------------------------------------------------------")
-    st.info("-----------------------------------------------------------------")
+            ratio = total_put_oi / total_call_oi
+        if ratio < 225:
+            print('Ratio is less than 225')
+            st.write('Ratio is less than 225')
+            if difference > 0:
+                print('Bearish')
+                print("Buy strike price: ", nearest_strikes_list[2])
+                st.write('Bear')
+                st.write(f'price: {nearest_strikes_list[2]}')
+            else:
+                print('Bullish')
+                print("Buy strike price: ", nearest_strikes_list[0])
+                st.write('Bull')
+                st.write(f'price: {nearest_strikes_list[0]}')
+        print("-----------------------------------------------------------------")
+    st.write("-----------------------------------------------------------------")
     print("Second strategy")
-    st.info("Second strategy")
-    # get sum ratio
-    if sum_call_ltp_mul_chng_in_oi > sum_put_ltp_mul_chng_in_oi:
-        ratio = sum_call_ltp_mul_chng_in_oi / sum_put_ltp_mul_chng_in_oi
-    else:
-        ratio = sum_put_ltp_mul_chng_in_oi / sum_call_ltp_mul_chng_in_oi
-
-    print(f'call ltp mul chng in oi: {sum_call_ltp_mul_chng_in_oi}')
-    print(f'put ltp mul chng in oi: {sum_put_ltp_mul_chng_in_oi}')
-    print(f'Ratio: {ratio}')
-    st.write(f'cl ltp mul chng in: {sum_call_ltp_mul_chng_in_oi}')
-    st.write(f'pt ltp mul chng in: {sum_put_ltp_mul_chng_in_oi}')
-    if ratio < 225:
-        print('Ratio is less than 225')
-        st.info('Ratio is less than 225')
+    with st.expander("Second strategy") :
+        # get sum ratio
         if sum_call_ltp_mul_chng_in_oi > sum_put_ltp_mul_chng_in_oi:
-            print('Bearish')
-            print("Buy strike price: ", nearest_strikes_list[2])
-            st.info('Bear')
-            st.info(f'price 1: {nearest_strikes_list[2]}')
-            st.info(f'price 2: {nearest_strikes_list[2] + 100}')
+            ratio = sum_call_ltp_mul_chng_in_oi / sum_put_ltp_mul_chng_in_oi
         else:
-            print('Bullish')
-            print("Buy strike price: ", nearest_strikes_list[0])
-            st.info('Bull')
-            st.info(f'price 1: {nearest_strikes_list[0]}')
-            st.info(f'price 2: {nearest_strikes_list[0] - 100}')
+            ratio = sum_put_ltp_mul_chng_in_oi / sum_call_ltp_mul_chng_in_oi
+
+        print(f'call ltp mul chng in oi: {sum_call_ltp_mul_chng_in_oi}')
+        print(f'put ltp mul chng in oi: {sum_put_ltp_mul_chng_in_oi}')
+        print(f'Ratio: {ratio}')
+        st.write(f'cl ltp mul chng in: {sum_call_ltp_mul_chng_in_oi}')
+        st.write(f'pt ltp mul chng in: {sum_put_ltp_mul_chng_in_oi}')
+        if ratio < 225:
+            print('Ratio is less than 225')
+            st.write('Ratio is less than 225')
+            if sum_call_ltp_mul_chng_in_oi > sum_put_ltp_mul_chng_in_oi:
+                print('Bearish')
+                print("Buy strike price: ", nearest_strikes_list[2])
+                st.write('Bear')
+                st.write(f'price 1: {nearest_strikes_list[2]}')
+                st.write(f'price 2: {nearest_strikes_list[2] + 100}')
+            else:
+                print('Bullish')
+                print("Buy strike price: ", nearest_strikes_list[0])
+                st.write('Bull')
+                st.write(f'price 1: {nearest_strikes_list[0]}')
+                st.write(f'price 2: {nearest_strikes_list[0] - 100}')
