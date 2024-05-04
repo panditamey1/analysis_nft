@@ -34,15 +34,19 @@ if st.button('Load CSV'):
         return result
 
 
-    data['OI'] = data['OI'].str.replace(',', '').astype(int)
+    data['OI'] = data['OI'].str.replace(',', '')
     data['CHNG IN OI'] = data['CHNG IN OI'].str.replace(',', '')
-    data['OI.1'] = data['OI.1'].str.replace(',', '').astype(int)
+    data['OI.1'] = data['OI.1'].str.replace(',', '')
     data['CHNG IN OI.1'] = data['CHNG IN OI.1'].str.replace(',', '')
-    data['LTP'] = data['LTP'].str.replace(',', '').astype(float)
-    data['LTP.1'] = data['LTP.1'].str.replace(',', '').astype(float)
+    data['LTP'] = data['LTP'].str.replace(',', '')
+    data['LTP.1'] = data['LTP.1'].str.replace(',', '')
 
     data['CHNG IN OI'] = data['CHNG IN OI'].apply(check_digit).astype(float)
     data['CHNG IN OI.1'] = data['CHNG IN OI.1'].apply(check_digit).astype(float)
+    data['OI'] = data['OI'].apply(check_digit).astype(float)
+    data['OI.1'] = data['OI.1'].apply(check_digit).astype(float)
+    data['LTP'] = data['LTP'].apply(check_digit).astype(float)
+    data['LTP.1'] = data['LTP.1'].apply(check_digit).astype(float)
     nearest_strikes_list = nearest_strikes(example_strike_price)
     strike_data = get_oi_changes_for_strikes(nearest_strikes_list)
     print(strike_data)
