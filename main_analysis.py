@@ -12,8 +12,7 @@ if st.button('Load CSV'):
     st.write(data.head())
 
     example_strike_price = strike_price
-    data = pd.read_csv(file_path, skiprows=1)
-    print(data.head())
+
     def nearest_strikes(strike):
         base = (strike // 100) * 100  # Find the nearest lower multiple of 100
         return [base, base + 50, base + 100]
